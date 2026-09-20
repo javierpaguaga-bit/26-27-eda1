@@ -45,3 +45,5 @@ Cada 15 minutos simulados, si la fila supera las 25 personas, se escucha por los
 # Pasos
 
 1.  Se crea la clase SimulacionCCCF y se crea el metodo pedido por el reto base.
+
+2. Se crearon las clases y metodos necesarios para los retos extendidos.
