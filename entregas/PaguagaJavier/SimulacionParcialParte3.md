@@ -46,7 +46,7 @@ La Implementación B utiliza mejor los recursos de memoria.
 
 - Implementación A
 
-- Ventaja: Encapsulamiento defensivo (Aislamiento).
+    * Ventaja: Encapsulamiento defensivo (Aislamiento).
 El nodo crea su propia copia independiente. Las mutaciones posteriores en el objeto original fuera del nodo no alteran el dato interno. Ejemplo:
 
 ```java
@@ -54,13 +54,13 @@ Persona p = new Persona("Carlos", "111");
 Nodo n = new Nodo(p, null);
 p.setNombre("Pedro"); // El nodo sigue teniendo "Carlos"
 ```
-- Desventajas: Fallo crítico con referencias nulas pues si el argumento persona es null, la llamada persona.getNombre() rompe la ejecución inmediatamente; y pérdida de subtipos / polimorfismo pues si se pasa una subclase (por ejemplo, Empleado con campo sueldo), al reconstruir con new Persona(persona.getNombre(), persona.getDni()) se pierden los datos adicionales y el tipo dinámico del objeto.
+    * Desventajas: Fallo crítico con referencias nulas pues si el argumento persona es null, la llamada persona.getNombre() rompe la ejecución inmediatamente; y pérdida de subtipos / polimorfismo pues si se pasa una subclase (por ejemplo, Empleado con campo sueldo), al reconstruir con new Persona(persona.getNombre(), persona.getDni()) se pierden los datos adicionales y el tipo dinámico del objeto.
 
 - Implementación B
 
-- Ventaja: Rendimiento y flexibilidad, pues la Operación O(1) en tiempo y memoria (no invoca constructores). Además, admite sin fallos valores null: this.persona = null;.
+    * Ventaja: Rendimiento y flexibilidad, pues la Operación O(1) en tiempo y memoria (no invoca constructores). Además, admite sin fallos valores null: this.persona = null;.
 
-- Desventaja: Efectos colaterales por Aliasing (Mutabilidad compartida).
+    * Desventaja: Efectos colaterales por Aliasing (Mutabilidad compartida).
 Cualquier agente externo que conserve la referencia original puede mutar el estado del objeto dentro del nodo sin supervisión de la lista. Ejemplo:
 
 ```java
@@ -71,13 +71,19 @@ p.setNombre("Modificado"); // Modifica de forma invisible el objeto dentro del n
 ## Pregunta C: ¿Cómo afectaría cada implementación al comportamiento de una lista que use estos nodos?
 
 - Si la lista usa la Implementación B (Semántica por Referencia):
+
 1. Si un objeto cambia externamente, el contenido de la lista cambia automáticamente.
+
 2. Dos nodos de la lista pueden referenciar al mismo objeto físico en memoria.
+
 3. Si se muta el DNI desde fuera, métodos como contiene(persona) u obtenerPersona(dni) darán resultados desfasados o impredecibles respecto a cuándo se insertó.
 
 - Si la lista usa la Implementación A (Semántica de Instantánea / Snapshot):
+
 1. La lista se vuelve inmune a cambios externos una vez insertado el elemento.
+
 2. No se puede actualizar el contenido de la lista modificando los objetos originales.
+
 3. No admite la inserción de elementos null sin lanzar excepción.
 
 ---
