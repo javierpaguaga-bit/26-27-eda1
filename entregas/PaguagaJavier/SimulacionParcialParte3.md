@@ -202,21 +202,21 @@ Debido a que el comportamiento depende de la implementación del nodo con que tr
 
 - Total: 2 objetos Persona diferentes en el Heap.
 
-* new Persona("Manuel", "1234"): Instancia el primer objeto (@P1). Las variables manuel y referencia apuntan a este objeto.
+    * new Persona("Manuel", "1234"): Instancia el primer objeto (@P1). Las variables manuel y referencia apuntan a este objeto.
 
-* new Persona(manuel): El constructor de copia crea una segunda instancia independiente (@P2), apuntada por copia.
+    * new Persona(manuel): El constructor de copia crea una segunda instancia independiente (@P2), apuntada por copia.
 
-* Persona referencia = manuel;: No crea ningún objeto, únicamente duplica la referencia hacia @P1.
+    * Persona referencia = manuel;: No crea ningún objeto, únicamente duplica la referencia hacia @P1.
 
-* Las tres llamadas a insertarPersona no invocan new Persona.
+    * Las tres llamadas a insertarPersona no invocan new Persona.
 
 2. La Lista utiliza la Implementación A de Nodo (copia defensiva en cada nodo):
 
 - Total: 5 objetos Persona diferentes en el Heap.
 
-* Los 2 objetos creados en el main (@P1 y @P2).
+    * Los 2 objetos creados en el main (@P1 y @P2).
 
-* 3 objetos nuevos creados en el Heap, uno por cada llamada a insertarPersona, ya que el constructor del Nodo A ejecuta new Persona(...).
+    * 3 objetos nuevos creados en el Heap, uno por cada llamada a insertarPersona, ya que el constructor del Nodo A ejecuta new Persona(...).
 
 ## Pregunta B: Si hacemos manuel.setNombre("Manuel Antonio"), ¿qué elementos de la lista se verán afectados? ¿Por qué?
 
@@ -354,13 +354,13 @@ public class GestorPersonas {
 
 1. Uso de Copias Defensivas (Defensive Copies):
 
-*Al agregar una persona: almacenar un clon (new Persona(persona)).
+    * Al agregar una persona: almacenar un clon (new Persona(persona)).
 
-*Al retornar una persona en la búsqueda: devolver un clon (new Persona(encontrada)).
+    * Al retornar una persona en la búsqueda: devolver un clon (new Persona(encontrada)).
 
 2. Garantía de Inmutabilidad (Solución de diseño estructural):
 
-* Diseñar la clase Persona como inmutable (campos final, inicializados por constructor, sin setters). Al no existir operaciones de mutación sobre la instancia, compartir referencias directas resulta 100% seguro y ahorra consumo de memoria Heap.
+    * Diseñar la clase Persona como inmutable (campos final, inicializados por constructor, sin setters). Al no existir operaciones de mutación sobre la instancia, compartir referencias directas resulta 100% seguro y ahorra consumo de memoria Heap.
 
 ## Pregunta C: Proponga una solución que proteja la integridad de los datos.
 
